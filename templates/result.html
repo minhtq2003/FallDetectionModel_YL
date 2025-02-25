@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fall Detection Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+        }
+        h1 {
+            color: #d9534f;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        p {
+            color: #555;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+        video {
+            border: 3px solid #d9534f;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            text-decoration: none;
+            background-color: #5bc0de;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #31b0d5;
+        }
+        .alert {
+            background-color: #d9534f;
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        .footer {
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fall Detection Result</h1>
+
+        <!-- Thông báo cảnh báo nếu phát hiện ngã -->
+        <div class="alert">
+            <p><strong>Alert:</strong> A fall event has been detected in the monitored area.</p>
+        </div>
+
+        <!-- Video kết quả đã xử lý -->
+        <video width="600" height="auto" controls>
+            <source src="{{ video_path }}" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
+        
+
+        <p>Review the video to assess the situation and take appropriate action.</p>
+
+        <!-- Link quay lại trang chính -->
+        <a href="{{ url_for('index') }}">Go back to the main page</a>
+    </div>
+
+    <div class="footer">
+        <p>Powered by Fall Detection System &copy; 2024</p>
+    </div>
+</body>
+</html>

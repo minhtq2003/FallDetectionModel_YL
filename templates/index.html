@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fall Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #007BFF;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .file-input {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px dashed #007BFF;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #f4f7fb;
+        }
+
+        .file-input:hover {
+            background-color: #f0f8ff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #7f8ff4, #8a68b5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .camera-feed {
+            margin-top: 40px;
+        }
+
+        .camera-feed h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .camera-feed a {
+            text-decoration: none;
+        }
+
+        /* CSS cho phần loading */
+        .loading {
+            display: none; /* Mặc định là ẩn */
+            color: #007BFF;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #007BFF;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fall Detection System</h1>
+        <p>Upload a video or view the live camera feed to detect falls in real-time.</p>
+        
+        <!-- Form để tải video -->
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <label class="file-input">
+                <input type="file" name="video" accept="video/*" required>
+                Choose a video to upload
+            </label>
+            <br>
+            <button type="submit" class="btn">Upload and Detect</button>
+        </form>
+
+        <!-- Thông báo Loading -->
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            Processing video... Please wait.
+        </div>
+
+        <!-- Nút để xem camera feed -->
+        <div class="camera-feed">
+            <h3>Or view the live camera feed</h3>
+            <a href="/video_feed" target="_blank">
+                <button class="btn">View Camera Feed</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Lấy form upload và loading indicator
+        const uploadForm = document.getElementById('uploadForm');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        // Thêm sự kiện khi submit form
+        uploadForm.addEventListener('submit', function(event) {
+            // Hiển thị loading indicator
+            loadingIndicator.style.display = 'block';
+
+            // Ẩn form để ngăn người dùng nộp lại
+            uploadForm.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
